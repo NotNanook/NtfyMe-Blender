@@ -13,10 +13,11 @@ Once the addon is installed and enabled, provide the url to the addon under Edit
 
 ### Usage
 - Perform your usual tasks within Blender, such as rendering or playing animations.
-- Whenever a selected event occurs, ntfy will send a notification to your configured channels (e.g., phone)
+- Enable Ntfy notifications under Render Properties if you want to be notified when your render finishes
+- Whenever your render finishes, ntfy will send a notification to your configured channels (e.g., phone)
 
 ### Contributing
 Contributions to this addon are welcome! If you have any suggestions, bug reports, or improvements, please create an issue or submit a pull request to this repository.
 
 ### Other
-Enjoy the convenience of staying informed about your Blender activities with ntfy integration! If you find this addon useful, consider giving it a ⭐️. For any questions or concerns, feel free to create an issue on this repository or buy me a [coffee](https://ko-fi.com/notnanook).
+Enjoy the convenience of staying informed about your Blender activities with ntfy integration! If you find this addon useful, consider giving it a ⭐️ or buy me a [coffee](https://ko-fi.com/notnanook). For any questions or concerns, feel free to create an issue on this repository.
