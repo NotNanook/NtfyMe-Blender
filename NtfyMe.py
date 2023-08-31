@@ -9,6 +9,7 @@ bl_info = {
 
 import bpy
 import requests
+from bpy.app.handlers import persistent
 from bpy.props import StringProperty
 
 class NftyAddonPreferences(bpy.types.AddonPreferences):
@@ -23,13 +24,14 @@ class NftyAddonPreferences(bpy.types.AddonPreferences):
         layout = self.layout
         layout.prop(self, "webhook_url")
 
-class NotificationPanel(bpy.types.Panel):
+class NftyNotificationPanel(bpy.types.Panel):
     """Creates a Panel in the Object properties window"""
     bl_label = ""
     bl_idname = "OBJECT_PT_hello"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "render"
+    bl_options = {'DEFAULT_CLOSED'}
 
     def draw_header(self, context):
         layout = self.layout
@@ -42,7 +44,8 @@ class NotificationPanel(bpy.types.Panel):
         row = layout.row()
         row.prop(context.preferences.addons[__name__].preferences, "webhook_url")
 
-def send_webhook_notification(scene):
+@persistent
+def sendNtfy(scene):
     preferences = bpy.context.preferences
     addon_prefs = preferences.addons[__name__].preferences
     webhook_url = addon_prefs.webhook_url
@@ -58,15 +61,16 @@ def send_webhook_notification(scene):
 
 def register():
     bpy.utils.register_class(NftyAddonPreferences)
-    bpy.utils.register_class(NotificationPanel)
-    bpy.app.handlers.render_complete.append(send_webhook_notification)
+    bpy.utils.register_class(NftyNotificationPanel)
+    bpy.app.handlers.render_complete.append(sendNtfy)
     
     bpy.types.Scene.my_setting = bpy.props.BoolProperty(name="Enable Ntfy", default=False)
 
 def unregister():
-    bpy.app.handlers.render_complete.remove(send_webhook_notification)
     bpy.utils.unregister_class(NftyAddonPreferences)
-    bpy.utils.unregister_class(NotificationPanel)
+    bpy.utils.unregister_class(NftyNotificationPanel)
+    bpy.app.handlers.render_complete.remove(sendNtfy)
+    
     del bpy.types.Scene.my_setting
 
 if __name__ == "__main__":
