@@ -1,5 +1,5 @@
 bl_info = {
-    "name": "NftyMe Blender",
+    "name": "NtfyMe Blender",
     "author": "Nanook",
     "version": (1, 0),
     "blender": (2, 80, 0),
